@@ -1,0 +1,85 @@
+#!/usr/bin/env python
+import wnck, gtk, sys  #, gobject
+
+s = wnck.screen_get_default()
+LEFT = 0
+UP = 1
+RIGHT = 2
+DOWN = 3
+
+def f_window_on_this_workspace(window):
+    if window.get_window_type() == wnck.WindowType.__enum_values__[0] and\
+            window.is_on_workspace(s.get_active_workspace()):
+        return True
+    return False
+
+def switch_focus(direction):
+    while gtk.events_pending(): gtk.main_iteration()
+    #gobject.MainLoop.run()
+
+    windows = s.get_windows_stacked()
+    filtered_windows = filter(f_window_on_this_workspace,windows)
+
+    awin = filtered_windows[-1]
+    ageom = awin.get_geometry()
+
+    leftw = None
+    rightw = None
+    upperw = None
+    underw = None
+
+    for w in filtered_windows:
+        wgeom = w.get_geometry()
+        if wgeom[0] < ageom[0] and (leftw == None or leftw.get_geometry()[0] > wgeom[0]):
+            leftw = w
+
+        if wgeom[0] > ageom[0] and (rightw == None or rightw.get_geometry()[0] < wgeom[0]):
+            rightw = w
+
+        if wgeom[1] < ageom[1] and (upperw == None or upperw.get_geometry()[1] > wgeom[1]):
+            upperw = w
+
+        if wgeom[1] > ageom[1] and (underw == None or underw.get_geometry()[1] < wgeom[1]):
+            underw = w
+
+
+    # TODO window manager don't chance the focus...
+    #import time
+    #time.sleep(2)
+    #s.move_viewport(max(0, rightw.get_geometry()[0]), max(0, rightw.get_geometry()[1]))
+    #rightw.activate(int(time.time()))
+    #rightw.activate(int(time.time()))
+    import subprocess
+    nwin = None
+
+    if direction == LEFT:
+        nwin = leftw
+    elif direction == RIGHT:
+        nwin = rightw
+    elif direction == UP:
+        nwin = upperw
+    elif direction == DOWN:
+        nwin = underw
+
+    if nwin != None:
+        subprocess.Popen(("wmctrl -a " + nwin.get_name()).split())
+
+def print_usage():
+    print "usage: %s %s" % (sys.argv[0], "left|up|right|down")
+    sys.exit(-1)
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print_usage()
+    direction = sys.argv[1]
+
+    if direction == "left":
+        direction = LEFT
+    elif direction == "up":
+        direction = UP
+    elif direction == "right":
+        direction = RIGHT
+    elif direction == "down":
+        direction = DOWN
+    else:
+        print_usage()
+    switch_focus(direction)

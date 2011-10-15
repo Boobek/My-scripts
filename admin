@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+echo "Welcome in '`basename $0`'."
+
+if [ "$1" = "update" ]
+then
+  echo "Now update the system"
+  sudo bzr add /etc >/dev/null; sudo bzr commit -m "Upgrade" /etc >/dev/null
+  echo "/etc COMMENTED"
+  sudo aptitude update >/dev/null; sudo aptitude upgrade -y >/dev/null
+  echo "SYSTEM IS NOW UP TO DATE"
+fi
+
+if [ "$1" = "test" ]
+then
+  echo test
+fi
+
+read
+
