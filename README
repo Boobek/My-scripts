@@ -2,10 +2,7 @@ My script collection
 
 Contained scripts:
   windowManager - You can chance the focus beetwen 4 windows on a desktop with only one key combination (I use xbindkeys to bind the key combination to the program)
-
-
-libraries needing: 
-python2-wnck
-wmctrl
-virtualbox
+  libraries needing: 
+    python2-wnck
+    wmctrl
 

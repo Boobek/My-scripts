@@ -33,7 +33,8 @@ def switch_focus(direction):
         if wgeom[0] < ageom[0] and (leftw == None or leftw.get_geometry()[0] > wgeom[0]):
             leftw = w
 
-        if wgeom[0] > ageom[0] and (rightw == None or rightw.get_geometry()[0] < wgeom[0]):
+        if wgeom[0]+wgeom[2] > ageom[0]+ageom[2] and \
+        		(rightw == None or rightw.get_geometry()[0] + rightw.get_geometry()[2] < wgeom[0] + wgeom[2]):
             rightw = w
 
         if wgeom[1] < ageom[1] and (upperw == None or upperw.get_geometry()[1] > wgeom[1]):
