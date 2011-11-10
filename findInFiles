@@ -1,0 +1,19 @@
+clear
+# Colors need to be definied in ~/.bashrc
+pys=`find . -name "*.py" `
+
+for x in $pys
+do
+
+if [[ `cat $x | grep "$1"`   ]]
+then
+
+echo
+echo "$GREEN>> $x $LIGHT"
+cat $x | grep -n --color "$1"
+
+
+fi
+
+done
+
