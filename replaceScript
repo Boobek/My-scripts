@@ -1,0 +1,17 @@
+EXPECTED_ARGS=2
+if [ $# -ne $EXPECTED_ARGS ]
+then
+  echo "Usage: `basename $0` replaceWhat replaceWith"
+  echo "  This command replace all string in all files which is placed in the current working directory"
+  exit 1
+fi
+pys=`find . -name "*.py*" `
+
+for x in $pys
+do
+
+cat $x | sed s/"$1"/"$2"/g > $x.tmp
+mv $x.tmp $x
+
+done
+
