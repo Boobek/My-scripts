@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+killall webfsd 2>/dev/null
+webfsd -p 9999 -4 -r "$1"
+wicd-cli --wireless -d | grep IP
+echo "Port: 9999"
