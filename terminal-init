@@ -1,0 +1,1 @@
+urxvt -tr -fade 10 -fadecolor Red -tint Red -sh 68 -fg White +sb
