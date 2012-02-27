@@ -1,6 +1,17 @@
+[user]
+	name = Balazs KANYO
+	email = bkanyo@gmail.com
+[gui]
+	recentrepo = /home/boo/Development/mindmap-bckp
+[color]
+	ui = auto
 [alias]
- st = status -sb
- diff = diff --word-diff
- ci = commit
- br = branch
- l = log --oneline --decorate
+	slog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	st = status
+	st = status -sb
+	diff = diff --word-diff
+	ci = commit
+	br = branch
+	l = log --oneline --decorate
+
+
