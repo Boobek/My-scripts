@@ -1,0 +1,6 @@
+[alias]
+ st = status -sb
+ diff = diff --word-diff
+ ci = commit
+ br = branch
+ l = log --oneline --decorate
